@@ -13,7 +13,7 @@ var action_lock = false
 var attack_combo = 0
 var next_state = State.INVALID
 
-enum State { IDLE, WALK, ATTACKING, JUMPING, FALL, LANDING, INVALID }
+enum State { IDLE, WALK, ATTACKING, JUMPING, FALL, LANDING, ROLLING, INVALID }
 
 func try_attack() -> void:
 	if action_lock:
@@ -33,6 +33,12 @@ func try_attack() -> void:
 	if !$AttackComboTimer.is_stopped():
 		$AttackComboTimer.stop()
 
+func try_rolling() -> void:
+	if state == State.ROLLING:
+		return
+	state = State.ROLLING
+	action_lock = true
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("drawn_weapon"):
 		if weapon_state == WeaponState.HOLSTERED:
@@ -42,6 +48,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed("attack"):
 		try_attack()
+	
+	if event.is_action_pressed("rolling"):
+		try_rolling()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -59,6 +68,10 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	
+	if state == State.ROLLING:
+		var rolling_direction = -1 if facing_left else 1;
+		velocity.x = SPEED * rolling_direction
 		
 	if direction < 0:
 		facing_left = true
@@ -116,10 +129,12 @@ func get_animation_name() -> String:
 			animation_name = "landing" + suffix
 		State.ATTACKING:
 			animation_name = "attack" + String.num_int64(attack_combo + 1)
+		State.ROLLING:
+			animation_name = "rolling"
 	return animation_name
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name.begins_with("landing"):
+	if anim_name.begins_with("landing") or anim_name.begins_with("rolling"):
 		action_lock = false
 	if anim_name.begins_with("attack") and next_state != State.ATTACKING:
 		action_lock = false
@@ -141,7 +156,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 			#print("attack continue")
 			#action_lock = true
 			#attack_combo += 1
-
 
 func _on_attack_combo_timer_timeout() -> void:
 	attack_combo = 0
