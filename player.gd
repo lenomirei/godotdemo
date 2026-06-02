@@ -22,13 +22,13 @@ func try_attack() -> void:
 	if weapon_state == WeaponState.HOLSTERED:
 		weapon_state = WeaponState.DRAWN
 		
-	state = State.ATTACKING
 	action_lock = true
-	
 	if state == State.ATTACKING:
 		pass
 	else:
+		print("state is " + String.num_int64(state) + " attack combo is " + String.num_int64(attack_combo))
 		state = State.ATTACKING
+		attack_combo += 1
 	
 	if !$AttackComboTimer.is_stopped():
 		$AttackComboTimer.stop()
@@ -128,25 +128,28 @@ func get_animation_name() -> String:
 		State.LANDING:
 			animation_name = "landing" + suffix
 		State.ATTACKING:
-			animation_name = "attack" + String.num_int64(attack_combo + 1)
+			animation_name = "attack" + String.num_int64(attack_combo)
 		State.ROLLING:
 			animation_name = "rolling"
 	return animation_name
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	print(anim_name + " finished")
 	if anim_name.begins_with("landing") or anim_name.begins_with("rolling"):
 		action_lock = false
+
 	if anim_name.begins_with("attack") and next_state != State.ATTACKING:
 		action_lock = false
 		$AttackComboTimer.start()
 	elif anim_name.begins_with("attack") and next_state == State.ATTACKING:
+		print("preinput attack")
 		state = next_state
 		next_state = State.INVALID
 		action_lock = true
 		attack_combo += 1
 	
 	if anim_name == "attack4":
-		attack_combo = 0
+		attack_combo = 1
 		print("attack combo is finished")
 		
 	#if next_state != State.INVALID:
