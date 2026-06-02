@@ -86,6 +86,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			$AnimationPlayer.speed_scale = 1
 		velocity.y = ladder_direction * SPEED
+	else:
+		$AnimationPlayer.speed_scale = 1
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -105,7 +107,7 @@ func _physics_process(delta: float) -> void:
 		facing_left = false
 	
 	move_and_slide()
-	if !was_on_floor and is_on_floor():
+	if !was_on_floor and is_on_floor() and state == State.FALL:
 		on_landing()
 		
 	was_on_floor = is_on_floor()
