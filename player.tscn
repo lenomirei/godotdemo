@@ -15,6 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://dfqe42dpc6mx5" path="res://Knight_player_1.4/Knight_player/Landing_KG_2.png" id="7_6ct3r"]
 [ext_resource type="Texture2D" uid="uid://ckx0mv3xrtrf" path="res://Knight_player_1.4/Knight_player/ladders_KG_1.png" id="10_606se"]
 [ext_resource type="Texture2D" uid="uid://c6ql0e3yedxuh" path="res://Knight_player_1.4/Knight_player/Rolling_KG_1.png" id="12_bwjto"]
+[ext_resource type="Script" uid="uid://ba4n8kcs35s30" path="res://player/player_state_machine.gd" id="16_u1c27"]
+[ext_resource type="Script" uid="uid://crv8xen2o6wwu" path="res://player/states/motion/on_ground/idle.gd" id="17_op7ga"]
+[ext_resource type="Script" uid="uid://ckri6hopf2pii" path="res://player/states/motion/on_ground/walk.gd" id="18_q13i1"]
+[ext_resource type="Script" uid="uid://c7l0pouxkrjw0" path="res://player/states/motion/in_air/jumping.gd" id="19_pylmc"]
+[ext_resource type="Script" uid="uid://ihm500roufyk" path="res://player/states/motion/in_air/fall.gd" id="20_pbfsw"]
+[ext_resource type="Script" uid="uid://rl5y5bq5xnx" path="res://attack.gd" id="21_5tmop"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_186t8"]
 radius = 14.0
@@ -661,5 +667,29 @@ one_shot = true
 [node name="BufferTimer" type="Timer" parent="." unique_id=1192582721]
 wait_time = 0.3
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="StateMachine" type="Node" parent="." unique_id=842564576]
+script = ExtResource("16_u1c27")
+start_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1436034948]
+script = ExtResource("17_op7ga")
+
+[node name="Walk" type="Node" parent="StateMachine" unique_id=1499352121]
+script = ExtResource("18_q13i1")
+
+[node name="Jumping" type="Node" parent="StateMachine" unique_id=1034147264]
+script = ExtResource("19_pylmc")
+
+[node name="Fall" type="Node" parent="StateMachine" unique_id=1084321426]
+script = ExtResource("20_pbfsw")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=989020187]
+script = ExtResource("21_5tmop")
+
+[node name="AttackComboTimer" type="Timer" parent="StateMachine/Attack" unique_id=343583232]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="AttackComboTimer" to="." method="_on_attack_combo_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Attack/AttackComboTimer" to="StateMachine/Attack" method="_on_attack_combo_timer_timeout"]
