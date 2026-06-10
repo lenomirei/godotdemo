@@ -28,9 +28,9 @@ func update(_delta: float) -> void:
 	var direction :Vector2 = get_input_direction()
 	update_look_direction(get_facing_left())
 	if direction.x:
-		# 无论在空中还是在地面，都响应左右移动
+		# Respond to horizontal movement both in the air and on the ground.
 		owner.velocity.x = direction.x * SPEED
 	elif get_on_floor():
-		# 在地面且没有左右移动时，宣布进入空闲状态
+		# Enter idle while grounded with no horizontal movement.
 		owner.velocity.x = move_toward(owner.velocity.x, 0, SPEED)
 		finished.emit(PLAYER_STATE.IDLE)

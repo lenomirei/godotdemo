@@ -29,5 +29,5 @@ func _change_state(next_state_name: StringName) -> void:
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	owner.move_and_slide() # 或许下放到各个状态也OK
+	owner.move_and_slide() # This could also be delegated to each state.
 	

@@ -18,5 +18,13 @@ func get_on_floor() -> bool:
 func get_weapon_state() -> WeaponState:
 	return owner.weapon_state
 	
-func set_weapon_state(state: WeaponState):
-	owner.weapon_state = state
+func change_weapon_state():
+	if get_weapon_state() != WeaponState.DRAWN:
+		owner.weapon_state = WeaponState.DRAWN
+	else:
+		owner.weapon_state = WeaponState.HOLSTERED
+		
+	refresh_animation()
+	
+func refresh_animation() -> void:
+	pass

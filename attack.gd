@@ -5,7 +5,7 @@ var handle_next_attack: bool = false
 
 func enter() -> void:
 	if get_weapon_state() != WeaponState.DRAWN:
-		set_weapon_state(WeaponState.DRAWN)
+		change_weapon_state()
 	handle_next_attack = false
 	if !$AttackComboTimer.is_stopped():
 		attack_combo += 1
@@ -32,5 +32,5 @@ func _on_attack_combo_timer_timeout() -> void:
 	attack_combo = 1
 	
 func update(_delta: float) -> void:
-	# 暂时不允许攻击中移动
+	# Temporarily prevent movement while attacking.
 	owner.velocity.x = 0
