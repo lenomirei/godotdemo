@@ -1,7 +1,9 @@
 extends "on_ground.gd"
 
 func enter() -> void:
-	owner.get_node(^"AnimationPlayer").play("idle")
+	var weapon_state = get_weapon_state()
+	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
+	owner.get_node(^"AnimationPlayer").play("idle" + suffix)
 	
 func handle_input(_input_event: InputEvent) -> void:
 	return super.handle_input(_input_event)

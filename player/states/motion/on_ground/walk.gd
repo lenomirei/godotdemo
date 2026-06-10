@@ -1,7 +1,9 @@
 extends "res://player/states/motion/on_ground/on_ground.gd"
 
 func enter():
-	owner.get_node(^"AnimationPlayer").play("walk")
+	var weapon_state = get_weapon_state()
+	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
+	owner.get_node(^"AnimationPlayer").play("walk" + suffix)
 	var input_direction := get_input_direction()
 	update_look_direction(get_facing_left())
 	

@@ -1,6 +1,5 @@
 extends "res://state_machine/state.gd"
-enum State { IDLE, WALK, ATTACKING, JUMPING, FALL, LANDING, ROLLING, LADDERING, INVALID }
-
+enum WeaponState { HOLSTERED, DRAWN }
 
 const PLAYER_STATE: Dictionary[StringName, StringName] = {
 	&"IDLE": &"idle",
@@ -15,3 +14,9 @@ const PLAYER_STATE: Dictionary[StringName, StringName] = {
 
 func get_on_floor() -> bool:
 	return owner.is_on_floor()
+
+func get_weapon_state() -> WeaponState:
+	return owner.weapon_state
+	
+func set_weapon_state(state: WeaponState):
+	owner.weapon_state = state

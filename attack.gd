@@ -4,6 +4,8 @@ var attack_combo = 1
 var handle_next_attack: bool = false
 
 func enter() -> void:
+	if get_weapon_state() != WeaponState.DRAWN:
+		set_weapon_state(WeaponState.DRAWN)
 	handle_next_attack = false
 	if !$AttackComboTimer.is_stopped():
 		attack_combo += 1
@@ -26,6 +28,9 @@ func _on_animation_finished(_anim_name: String) -> void:
 		$AttackComboTimer.start()
 		finished.emit(PLAYER_STATE.IDLE)
 
-
 func _on_attack_combo_timer_timeout() -> void:
 	attack_combo = 1
+	
+func update(_delta: float) -> void:
+	# 暂时不允许攻击中移动
+	owner.velocity.x = 0
