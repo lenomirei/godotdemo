@@ -14,4 +14,7 @@ func handle_input(_input_event: InputEvent) -> void:
 	if _input_event.is_action_pressed("drawn_weapon"):
 		change_weapon_state()
 	
+	if _input_event.is_action_pressed("rolling"):
+		finished.emit(PLAYER_STATE.ROLLING)
+	
 	return super.handle_input(_input_event)

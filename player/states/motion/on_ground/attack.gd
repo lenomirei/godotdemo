@@ -1,4 +1,4 @@
-extends "res://player/player_state.gd"
+extends "res://player/states/motion/on_ground/on_ground.gd"
 
 var attack_combo = 1
 var handle_pre_attack: bool = false
@@ -17,6 +17,9 @@ func enter() -> void:
 func handle_input(_input_event: InputEvent) -> void:
 	if _input_event.is_action_pressed("attack"):
 		handle_pre_attack = true
+		
+	if _input_event.is_action_pressed("rolling"):
+		finished.emit(PLAYER_STATE.ROLLING)
 
 func _on_animation_finished(_anim_name: String) -> void:
 	if _anim_name.begins_with("attack") and handle_pre_attack:
