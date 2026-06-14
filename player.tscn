@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://ihm500roufyk" path="res://player/states/motion/in_air/fall.gd" id="20_pbfsw"]
 [ext_resource type="Script" uid="uid://rl5y5bq5xnx" path="res://player/states/motion/on_ground/attack.gd" id="21_5tmop"]
 [ext_resource type="Script" uid="uid://jlvhdc4ehyt0" path="res://player/states/motion/on_ground/rolling.gd" id="22_7ahtn"]
+[ext_resource type="Script" uid="uid://d24vfwuixv45c" path="res://player/states/motion/on_ground/landing.gd" id="23_7lmhl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_186t8"]
 radius = 14.0
@@ -694,6 +695,9 @@ one_shot = true
 
 [node name="Rolling" type="Node" parent="StateMachine" unique_id=17969112]
 script = ExtResource("22_7ahtn")
+
+[node name="Landing" type="Node" parent="StateMachine" unique_id=1261749133]
+script = ExtResource("23_7lmhl")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="AttackComboTimer" to="." method="_on_attack_combo_timer_timeout"]

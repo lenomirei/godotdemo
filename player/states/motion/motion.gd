@@ -25,12 +25,9 @@ func update_look_direction(left: bool) -> void:
 	owner.get_node(^"Sprite2D").flip_h = true if owner.facing_left else false
 
 func update(_delta: float) -> void:
+	# handle input and speed in x direction
 	var direction :Vector2 = get_input_direction()
 	update_look_direction(get_facing_left())
 	if direction.x:
 		# Respond to horizontal movement both in the air and on the ground.
 		owner.velocity.x = direction.x * SPEED
-	elif get_on_floor():
-		# Enter idle while grounded with no horizontal movement.
-		owner.velocity.x = move_toward(owner.velocity.x, 0, SPEED)
-		finished.emit(PLAYER_STATE.IDLE)
