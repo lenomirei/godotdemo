@@ -9,6 +9,7 @@ var PLAYER_STATE: Dictionary = preload("res://player/player_state.gd").PLAYER_ST
 @onready var attack: Node = $Attack
 @onready var rolling: Node = $Rolling
 @onready var landing: Node = $Landing
+@onready var laddering: Node = $Laddering
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,6 +21,7 @@ func _ready() -> void:
 		PLAYER_STATE.ATTACKING: attack,
 		PLAYER_STATE.ROLLING: rolling,
 		PLAYER_STATE.LANDING: landing,
+		PLAYER_STATE.LADDERING: laddering,
 	}
 
 func _change_state(next_state_name: StringName) -> void:

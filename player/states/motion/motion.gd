@@ -3,7 +3,8 @@ extends "res://player/player_state.gd"
 const SPEED = 300.0
 
 func handle_input(_input_event: InputEvent) -> void:
-	pass
+	if _input_event.is_action_pressed("climb"):
+		try_climb()
 	
 func get_input_direction() -> Vector2:
 	return Vector2(
@@ -31,3 +32,17 @@ func update(_delta: float) -> void:
 	if direction.x:
 		# Respond to horizontal movement both in the air and on the ground.
 		owner.velocity.x = direction.x * SPEED
+
+func is_on_ladder() -> bool:
+	var tilemap: TileMapLayer = owner.get_parent().get_node(^"TileMapLayer")
+	var cell = tilemap.local_to_map(
+		tilemap.to_local(owner.global_position)
+	)
+	var tile_data = tilemap.get_cell_tile_data(cell)
+	if tile_data == null:
+		return false
+	return tile_data.get_custom_data("ladder")
+
+func try_climb() -> void:
+	if is_on_ladder():
+		finished.emit(PLAYER_STATE.LADDERING)
