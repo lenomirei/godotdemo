@@ -9,7 +9,7 @@ func update(_delta: float) -> void:
 	var input_direction: Vector2 = get_input_direction()
 	if input_direction.x != 0:
 		finished.emit(PLAYER_STATE.WALK)
-			
+	
 	super.update(_delta)
 
 func refresh_animation() -> void:

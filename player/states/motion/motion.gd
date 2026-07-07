@@ -3,7 +3,7 @@ extends "res://player/player_state.gd"
 const SPEED = 300.0
 
 func handle_input(_input_event: InputEvent) -> void:
-	if _input_event.is_action_pressed("climb"):
+	if _input_event.is_action_pressed("climbup") || _input_event.is_action_pressed("climbdown"):
 		try_climb()
 	
 func get_input_direction() -> Vector2:
@@ -35,14 +35,42 @@ func update(_delta: float) -> void:
 
 func is_on_ladder() -> bool:
 	var tilemap: TileMapLayer = owner.get_parent().get_node(^"TileMapLayer")
-	var cell = tilemap.local_to_map(
-		tilemap.to_local(owner.global_position)
-	)
-	var tile_data = tilemap.get_cell_tile_data(cell)
-	if tile_data == null:
+	var shape_node = owner.get_node(^"CollisionShape2D")
+	var shape = shape_node.shape
+	var center = shape_node.global_position
+	var points: Array[Vector2] = [center]
+
+	if shape is CapsuleShape2D:
+		var capsule := shape as CapsuleShape2D
+		var half_width := capsule.radius
+		var half_height := capsule.height * 0.5
+		points.append(center + Vector2(0, -half_height))
+		points.append(center + Vector2(0, half_height))
+		points.append(center + Vector2(-half_width, 0))
+		points.append(center + Vector2(half_width, 0))
+	for world_position in points:
+		var cell = tilemap.local_to_map(tilemap.to_local(world_position))
+		var tile_data = tilemap.get_cell_tile_data(cell)
+		if tile_data != null and tile_data.get_custom_data("ladder"):
+			return true
+
+	return false
+	
+func ladder_is_by_feet() -> bool:
+	var tilemap: TileMapLayer = owner.get_parent().get_node(^"TileMapLayer")
+	var raycast: RayCast2D = owner.get_node(^"LadderDetectRay")
+	var point: Vector2 = raycast.get_collision_point()
+	var local: Vector2 = tilemap.to_local(point)
+	var coords: Vector2i = tilemap.local_to_map(local)
+	var tile_data = tilemap.get_cell_tile_data(coords)
+	if tile_data:
+		var ladder: Variant = tile_data.get_custom_data("ladder")
+		return ladder as bool
+	else:
 		return false
-	return tile_data.get_custom_data("ladder")
 
 func try_climb() -> void:
 	if is_on_ladder():
+		finished.emit(PLAYER_STATE.LADDERING)
+	elif ladder_is_by_feet():
 		finished.emit(PLAYER_STATE.LADDERING)
