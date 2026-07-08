@@ -2,7 +2,9 @@ extends "res://player/states/motion/in_air/in_air.gd"
 
 var last_yvelocity
 func enter() -> void:
-	owner.get_node(^"AnimationPlayer").play("fall")
+	var weapon_state = get_weapon_state()
+	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
+	owner.get_node(^"AnimationPlayer").play("fall" + suffix)
 
 
 func update(_delta: float) -> void:

@@ -8,7 +8,9 @@ func init(speed: float, velocity: float) -> void:
 func enter() -> void:
 	update_look_direction(get_facing_left())
 	owner.velocity.y = JUMP_VELOCITY
-	owner.get_node(^"AnimationPlayer").play("jump")
+	var weapon_state = get_weapon_state()
+	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
+	owner.get_node(^"AnimationPlayer").play("jump" + suffix)
 	
 func update(_delta: float) -> void:
 	if owner.is_on_floor() && owner.velocity.y == 0:
