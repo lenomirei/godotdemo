@@ -25,7 +25,7 @@ func _on_animation_finished(_anim_name: String) -> void:
 	if _anim_name.begins_with("attack") and handle_pre_attack:
 		attack_combo += 1
 		
-		finished.emit(PLAYER_STATE.ATTACKING)
+		finished.emit(PLAYER_STATE.ATTACK)
 	elif _anim_name.begins_with("attack"):
 		# attack animation finished and no preinput to continue attacking
 		# start the combo timer

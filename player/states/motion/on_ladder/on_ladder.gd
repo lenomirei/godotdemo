@@ -28,7 +28,7 @@ func has_ladder_below_feet() -> bool:
 
 func handle_input(_input_event: InputEvent) -> void:
 	if _input_event.is_action_pressed("jump"):
-		finished.emit(PLAYER_STATE.JUMPING)
+		finished.emit(PLAYER_STATE.JUMP)
 
 func update(_delta: float) -> void:
 	if !is_on_ladder():

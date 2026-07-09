@@ -1,6 +1,7 @@
 extends "res://player/player_state.gd"
 
 const SPEED = 300.0
+const CROUCH_SPEED = 150.0
 
 func handle_input(_input_event: InputEvent) -> void:
 	if _input_event.is_action_pressed("climbup") || _input_event.is_action_pressed("climbdown"):
@@ -28,8 +29,8 @@ func update_look_direction(left: bool) -> void:
 func update(_delta: float) -> void:
 	# handle input and speed in x direction
 	var direction :Vector2 = get_input_direction()
-	update_look_direction(get_facing_left())
 	if direction.x:
+		update_look_direction(get_facing_left())
 		# Respond to horizontal movement both in the air and on the ground.
 		owner.velocity.x = direction.x * SPEED
 
@@ -74,3 +75,12 @@ func try_climb() -> void:
 		finished.emit(PLAYER_STATE.LADDERING)
 	elif ladder_is_by_feet():
 		finished.emit(PLAYER_STATE.LADDERING)
+
+func refresh_animation() -> void:
+	var animation_player: AnimationPlayer = owner.get_node(^"AnimationPlayer")
+	var weapon_state = get_weapon_state()
+	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
+	var animation_name = PLAYER_STATE[name.to_upper()] + suffix;
+	print("switch to " + animation_name)
+	if animation_player.has_animation(animation_name):
+		animation_player.play(animation_name)

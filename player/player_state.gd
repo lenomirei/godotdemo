@@ -4,12 +4,15 @@ enum WeaponState { HOLSTERED, DRAWN }
 const PLAYER_STATE: Dictionary[StringName, StringName] = {
 	&"IDLE": &"idle",
 	&"WALK": &"walk",
-	&"ATTACKING": &"attacking",
-	&"JUMPING": &"jumping",
+	&"ATTACK": &"attack",
+	&"JUMP": &"jump",
 	&"FALL": &"fall",
 	&"LANDING": &"landing",
 	&"ROLLING": &"rolling",
 	&"LADDERING": &"laddering",
+	&"CROUCHIN": &"crouch_in",
+	&"CROUCHIDLE": &"crouch_idle",
+	&"CROUCHWALK": &"crouch_walk",
 }
 
 func get_on_floor() -> bool:

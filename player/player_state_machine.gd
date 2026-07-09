@@ -4,24 +4,30 @@ var PLAYER_STATE: Dictionary = preload("res://player/player_state.gd").PLAYER_ST
 
 @onready var idle: Node = $Idle
 @onready var walk: Node = $Walk
-@onready var jumping: Node = $Jumping
+@onready var jump: Node = $Jump
 @onready var fall: Node = $Fall
 @onready var attack: Node = $Attack
 @onready var rolling: Node = $Rolling
 @onready var landing: Node = $Landing
 @onready var laddering: Node = $Laddering
+@onready var crouch_in: Node = $CrouchIn
+@onready var crouch_idle: Node = $CrouchIdle
+@onready var crouch_walk: Node = $CrouchWalk
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	states_map = {
 		PLAYER_STATE.IDLE: idle,
 		PLAYER_STATE.WALK: walk,
-		PLAYER_STATE.JUMPING: jumping,
+		PLAYER_STATE.JUMP: jump,
 		PLAYER_STATE.FALL: fall,
-		PLAYER_STATE.ATTACKING: attack,
+		PLAYER_STATE.ATTACK: attack,
 		PLAYER_STATE.ROLLING: rolling,
 		PLAYER_STATE.LANDING: landing,
 		PLAYER_STATE.LADDERING: laddering,
+		PLAYER_STATE.CROUCHIN: crouch_in,
+		PLAYER_STATE.CROUCHIDLE: crouch_idle,
+		PLAYER_STATE.CROUCHWALK: crouch_walk,
 	}
 
 func _change_state(next_state_name: StringName) -> void:
