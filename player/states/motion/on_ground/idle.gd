@@ -1,6 +1,7 @@
 extends "on_ground.gd"
 
 func enter() -> void:
+	owner.velocity.x = 0
 	var weapon_state = get_weapon_state()
 	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
 	owner.get_node(^"AnimationPlayer").play("idle" + suffix)
