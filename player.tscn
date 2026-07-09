@@ -994,7 +994,6 @@ _data = {
 }
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=928505067]
-position = Vector2(-1, 2)
 script = ExtResource("1_ij6vw")
 metadata/_edit_group_ = true
 
