@@ -199,3 +199,8 @@ var attack_combo = 0
 #
 #func _on_attack_combo_timer_timeout() -> void:
 	#attack_combo = 0
+
+
+func _on_attack_hit_box_body_entered(body: Node2D) -> void:
+	var monster: Monster = body as Monster
+	monster.hit();

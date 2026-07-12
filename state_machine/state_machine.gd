@@ -49,7 +49,7 @@ func _change_state(next_state_name: StringName) -> void:
 		return
 	current_state.exit()
 	states_stack[0] = states_map[next_state_name] # Get state Node from state string name
-	var last_state = current_state
+	var last_state: Node = current_state
 	current_state = states_stack[0]
 	state_changed.emit(last_state, current_state) # fire the state_changed signal
 	
