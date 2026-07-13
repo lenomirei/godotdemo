@@ -494,3 +494,10 @@ script = ExtResource("7_3r7jw")
 
 [node name="Hit" type="Node" parent="StateMachine" unique_id=1014210501]
 script = ExtResource("9_rux75")
+
+[node name="PlayerDetectRay" type="RayCast2D" parent="." unique_id=1146462238]
+position = Vector2(0, 16)
+target_position = Vector2(-100, 0)
+
+[node name="FloorDetectRay" type="RayCast2D" parent="." unique_id=498070294]
+target_position = Vector2(0, 40)
