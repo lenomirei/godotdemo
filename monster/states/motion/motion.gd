@@ -5,16 +5,12 @@ func update_look_direction(left: bool) -> void:
 	if owner.facing_left != left:
 		owner.facing_left = left
 	owner.get_node(^"Sprite2D").flip_v = false
-	owner.get_node(^"Sprite2D").flip_h = true if owner.facing_left else false
+	owner.get_node(^"Sprite2D").flip_h = false if owner.facing_left else true
 
-
-func update(_delta: float) -> void:
-	# handle input and speed in x direction
+func get_look_direction() -> Vector2:
 	var direction :Vector2 = Vector2.ZERO
-	if owner.velocity.x > 0:
+	if not owner.facing_left:
 		direction = Vector2.RIGHT
-	elif owner.velocity.x < 0:
+	else:
 		direction = Vector2.LEFT
-	
-	if direction.x:
-		update_look_direction(owner.facing_left)
+	return direction
