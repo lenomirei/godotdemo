@@ -25,6 +25,7 @@ func update_look_direction(left: bool) -> void:
 		owner.facing_left = left
 	owner.get_node(^"Sprite2D").flip_v = false
 	owner.get_node(^"Sprite2D").flip_h = true if owner.facing_left else false
+	owner.get_node(^"Weapon").scale.x = -1 if owner.facing_left else 1
 
 func update(_delta: float) -> void:
 	# handle input and speed in x direction

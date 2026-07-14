@@ -15,6 +15,10 @@ run/main_scene="uid://47gwo8g7o7d1"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input]
 
 drawn_weapon={
