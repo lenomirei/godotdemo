@@ -463,4 +463,8 @@ tile_set = SubResource("TileSet_y32ns")
 position = Vector2(415, 250)
 
 [node name="Monster" parent="." unique_id=939319072 instance=ExtResource("3_oi3di")]
-position = Vector2(622, 239)
+position = Vector2(680, 237)
+
+[node name="Monster2" parent="." unique_id=550354965 instance=ExtResource("3_oi3di")]
+position = Vector2(932, 559)
+patrol = false
