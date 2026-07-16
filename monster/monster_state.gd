@@ -1,5 +1,6 @@
 extends "res://state_machine/state.gd"
 
+class_name MonsterState
 
 const MONSTER_STATE: Dictionary[StringName, StringName] = {
 	&"IDLE": &"idle",
@@ -8,3 +9,5 @@ const MONSTER_STATE: Dictionary[StringName, StringName] = {
 	&"RUN": &"run",
 	&"DIE": &"die",
 }
+
+enum MonsterStateMachineCommand { HIT, DIE }

@@ -26,5 +26,9 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	owner.move_and_slide() # This could also be delegated to each state.
 
-func handle_command() -> void:
-	current_state.finished.emit(MONSTER_STATE.HIT);
+func handle_command(command: MonsterState.MonsterStateMachineCommand) -> void:
+	match command:
+		MonsterState.MonsterStateMachineCommand.HIT:
+			current_state.finished.emit(MONSTER_STATE.HIT);
+		MonsterState.MonsterStateMachineCommand.DIE:
+			current_state.finished.emit(MONSTER_STATE.DIE);

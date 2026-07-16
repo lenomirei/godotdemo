@@ -607,5 +607,25 @@ target_position = Vector2(0, 20)
 position = Vector2(0, 16)
 target_position = Vector2(-100, 0)
 
+[node name="HpBar" type="ColorRect" parent="." unique_id=1824209860]
+visible = false
+offset_left = -25.0
+offset_top = -7.5
+offset_right = 25.0
+offset_bottom = -2.5
+color = Color(0, 0, 0, 1)
+metadata/_edit_group_ = true
+
+[node name="Hp" type="ColorRect" parent="HpBar" unique_id=190240485]
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 5.0
+color = Color(0.78431374, 0, 0, 1)
+metadata/_edit_group_ = true
+
+[node name="ShowTimer" type="Timer" parent="HpBar" unique_id=1552423651]
+wait_time = 3.0
+
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="StateMachine/Idle/IdleTimer" to="StateMachine/Idle" method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="HpBar/ShowTimer" to="." method="_on_show_timer_timeout"]
