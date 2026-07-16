@@ -6,6 +6,7 @@ func update_look_direction(left: bool) -> void:
 		owner.facing_left = left
 	owner.get_node(^"Sprite2D").flip_v = false
 	owner.get_node(^"Sprite2D").flip_h = false if owner.facing_left else true
+	owner.get_node(^"Direction").scale.x = 1 if owner.facing_left else -1
 
 func get_look_direction() -> Vector2:
 	var direction :Vector2 = Vector2.ZERO
@@ -16,7 +17,7 @@ func get_look_direction() -> Vector2:
 	return direction
 
 func update(_delta: float) -> void:
-	var player_detect_ray: RayCast2D = owner.get_node(^"PlayerDetectRay")
+	var player_detect_ray: RayCast2D = owner.get_node(^"Direction/PlayerDetectRay")
 	if player_detect_ray.is_colliding() and player_detect_ray.collide_with_bodies:
 		var player: Player = player_detect_ray.get_collider() as Player
 		var d: Vector2 = player.position.direction_to(owner.position)

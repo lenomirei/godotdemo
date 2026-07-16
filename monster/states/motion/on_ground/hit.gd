@@ -9,6 +9,9 @@ func enter() -> void:
 	else:
 		animation_player.play("hit")
 
+func update(_delta: float) -> void:
+	pass
+
 func _on_animation_finished(_anim_name: String) -> void:
 	if _anim_name.contains("hit"):
 		finished.emit(MONSTER_STATE.RUN)
