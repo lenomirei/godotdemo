@@ -6,4 +6,5 @@ const MONSTER_STATE: Dictionary[StringName, StringName] = {
 	&"ATTACK": &"attack",
 	&"HIT": &"hit",
 	&"RUN": &"run",
+	&"DIE": &"die",
 }
