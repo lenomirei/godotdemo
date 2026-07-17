@@ -8,6 +8,7 @@ var MONSTER_STATE: Dictionary = preload("res://monster/monster_state.gd").MONSTE
 @onready var die: Node = $Die
 @onready var attack: Node = $Attack
 @onready var chase: Node = $Chase
+@onready var stun: Node = $Stun
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,6 +19,7 @@ func _ready() -> void:
 		MONSTER_STATE.DIE: die,
 		MONSTER_STATE.ATTACK: attack,
 		MONSTER_STATE.CHASE: chase,
+		MONSTER_STATE.STUN: stun,
 	}
 
 func _change_state(next_state_name: StringName) -> void:

@@ -9,6 +9,7 @@ const MONSTER_STATE: Dictionary[StringName, StringName] = {
 	&"RUN": &"run",
 	&"DIE": &"die",
 	&"CHASE": &"chase",
+	&"STUN": &"stun",
 }
 
 enum MonsterStateMachineCommand { HIT, DIE, ATTACK }
