@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://ccmoy428paht3" path="res://monster/states/motion/on_ground/idle.gd" id="8_rux75"]
 [ext_resource type="Script" uid="uid://cugrrtvekfyb7" path="res://monster/states/motion/on_ground/hit.gd" id="9_rux75"]
 [ext_resource type="Script" uid="uid://bypkkmhi7n1v2" path="res://monster/states/motion/on_ground/die.gd" id="11_iyrhi"]
+[ext_resource type="Texture2D" uid="uid://ddkidij5ibrfl" path="res://assets/Background Static.png" id="13_s53e4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ga5te"]
 radius = 14.0
@@ -555,12 +556,17 @@ _data = {
 &"run": SubResource("Animation_ga5te")
 }
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o46hk"]
+load_path = "res://.godot/imported/Foreground.png-c7e85c9c91d363e5a7c55fdb320dc6b9.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s53e4"]
+load_path = "res://.godot/imported/Background Bar.png-155db12685cbb967f373640603dac5b5.ctex"
+
 [node name="Monster" type="CharacterBody2D" unique_id=939319072]
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 512
 script = ExtResource("1_6tndq")
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=444814243]
 texture = ExtResource("1_vr0w3")
@@ -607,25 +613,21 @@ target_position = Vector2(0, 20)
 position = Vector2(0, 16)
 target_position = Vector2(-100, 0)
 
-[node name="HpBar" type="ColorRect" parent="." unique_id=1824209860]
-visible = false
+[node name="HpBar" type="TextureProgressBar" parent="." unique_id=511671301]
 offset_left = -25.0
-offset_top = -7.5
+offset_top = -10.0
 offset_right = 25.0
-offset_bottom = -2.5
-color = Color(0, 0, 0, 1)
-metadata/_edit_group_ = true
+offset_bottom = -5.0
+step = 10.0
+value = 100.0
+rounded = true
+nine_patch_stretch = true
+texture_under = ExtResource("13_s53e4")
+texture_over = SubResource("CompressedTexture2D_o46hk")
+texture_progress = SubResource("CompressedTexture2D_s53e4")
 
-[node name="Hp" type="ColorRect" parent="HpBar" unique_id=190240485]
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 5.0
-color = Color(0.78431374, 0, 0, 1)
-metadata/_edit_group_ = true
-
-[node name="ShowTimer" type="Timer" parent="HpBar" unique_id=1552423651]
+[node name="ShowTimer" type="Timer" parent="HpBar" unique_id=1583725172]
 wait_time = 3.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="StateMachine/Idle/IdleTimer" to="StateMachine/Idle" method="_on_idle_timer_timeout"]
-[connection signal="timeout" from="HpBar/ShowTimer" to="." method="_on_show_timer_timeout"]

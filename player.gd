@@ -4,6 +4,7 @@ class_name Player
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+@export var physics_attack_damage: int
 
 enum WeaponState { HOLSTERED, DRAWN }
 var weapon_state: WeaponState = WeaponState.HOLSTERED
@@ -204,4 +205,4 @@ var attack_combo = 0
 
 func _on_attack_hit_box_body_entered(body: Node2D) -> void:
 	var monster: Monster = body as Monster
-	monster.hit();
+	monster.hit(physics_attack_damage);
