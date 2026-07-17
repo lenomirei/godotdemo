@@ -11,7 +11,9 @@
 [ext_resource type="Script" uid="uid://ccmoy428paht3" path="res://monster/states/motion/on_ground/idle.gd" id="8_rux75"]
 [ext_resource type="Script" uid="uid://cugrrtvekfyb7" path="res://monster/states/motion/on_ground/hit.gd" id="9_rux75"]
 [ext_resource type="Script" uid="uid://bypkkmhi7n1v2" path="res://monster/states/motion/on_ground/die.gd" id="11_iyrhi"]
+[ext_resource type="Script" uid="uid://clnlph0165woc" path="res://monster/states/motion/on_ground/attack.gd" id="12_s53e4"]
 [ext_resource type="Texture2D" uid="uid://ddkidij5ibrfl" path="res://assets/Background Static.png" id="13_s53e4"]
+[ext_resource type="Script" uid="uid://c2n2j3fjdu4u3" path="res://monster/states/motion/on_ground/chase.gd" id="13_tpp6e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ga5te"]
 radius = 14.0
@@ -104,6 +106,42 @@ tracks/6/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Direction/AttackHitBox/CollisionShape2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Direction/AttackHitBox:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Direction/AttackHitBox:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_vr0w3"]
 resource_name = "idle"
@@ -190,6 +228,42 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0.0, 0.5515240436302086, 1.213003830136059, -0.39269908169872414, -1.9355701404617116, -0.7592182246175333, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Direction/AttackHitBox/CollisionShape2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Direction/AttackHitBox:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(16.98, 3.585), Vector2(33, 15), Vector2(-7.515, -0.455), Vector2(-25, 15)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Direction/AttackHitBox:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.29496064358704127, 1.064650843716541, -0.2181661564992912, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_iyrhi"]
@@ -556,6 +630,10 @@ _data = {
 &"run": SubResource("Animation_ga5te")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o46hk"]
+radius = 7.5
+height = 29.0
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o46hk"]
 load_path = "res://.godot/imported/Foreground.png-c7e85c9c91d363e5a7c55fdb320dc6b9.ctex"
 
@@ -573,6 +651,7 @@ texture = ExtResource("1_vr0w3")
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=383420235]
+visible = false
 position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_ga5te")
 
@@ -599,6 +678,12 @@ script = ExtResource("9_rux75")
 [node name="Die" type="Node" parent="StateMachine" unique_id=1575403748]
 script = ExtResource("11_iyrhi")
 
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1306101380]
+script = ExtResource("12_s53e4")
+
+[node name="Chase" type="Node" parent="StateMachine" unique_id=1947194736]
+script = ExtResource("13_tpp6e")
+
 [node name="FloorDetectRayLeft" type="RayCast2D" parent="." unique_id=498070294]
 position = Vector2(-15, 20)
 target_position = Vector2(0, 20)
@@ -612,6 +697,14 @@ target_position = Vector2(0, 20)
 [node name="PlayerDetectRay" type="RayCast2D" parent="Direction" unique_id=1146462238]
 position = Vector2(0, 16)
 target_position = Vector2(-100, 0)
+
+[node name="AttackHitBox" type="Area2D" parent="Direction" unique_id=570129925]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/AttackHitBox" unique_id=2071896022]
+position = Vector2(0, 8.5)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_o46hk")
+disabled = true
 
 [node name="HpBar" type="TextureProgressBar" parent="." unique_id=511671301]
 offset_left = -25.0
