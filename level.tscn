@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://b7r6ksotnn2yy" path="res://Textures-16.png" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://c8bt6osiwtkvj" path="res://player.tscn" id="2_oi3di"]
 [ext_resource type="PackedScene" uid="uid://c0euffwpkkrfl" path="res://monster.tscn" id="3_oi3di"]
-[ext_resource type="Script" uid="uid://bbgymbknccleq" path="res://hud.gd" id="4_0b4ue"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e48y"]
 texture = ExtResource("1_vonw3")
@@ -470,10 +469,3 @@ position = Vector2(680, 237)
 [node name="Monster2" parent="." unique_id=550354965 instance=ExtResource("3_oi3di")]
 position = Vector2(932, 559)
 patrol = false
-
-[node name="HUD" type="CanvasLayer" parent="." unique_id=210464477]
-script = ExtResource("4_0b4ue")
-
-[node name="HPContainer" type="HBoxContainer" parent="HUD" unique_id=797970437]
-offset_right = 358.0
-offset_bottom = 40.0
