@@ -837,6 +837,7 @@ shape = SubResource("CapsuleShape2D_o46hk")
 disabled = true
 
 [node name="HpBar" type="TextureProgressBar" parent="." unique_id=511671301]
+visible = false
 offset_left = -25.0
 offset_top = -10.0
 offset_right = 25.0
