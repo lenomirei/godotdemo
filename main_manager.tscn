@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bblhk2li6orqs"]
+
+[ext_resource type="PackedScene" uid="uid://47gwo8g7o7d1" path="res://level.tscn" id="1_2a7ao"]
+[ext_resource type="Texture2D" uid="uid://c8inwodl8yia4" path="res://assets/Icon_Small_WhiteOutline_HeartFull.png" id="2_x1407"]
+[ext_resource type="Texture2D" uid="uid://ba84m3vlwwjqn" path="res://assets/Icon_Small_WhiteOutline_HeartHalf.png" id="3_4g333"]
+[ext_resource type="Texture2D" uid="uid://fetb11lhmsod" path="res://assets/Icon_Small_WhiteOutline_HeartEmpty.png" id="4_pjkp7"]
+
+[node name="MainManager" type="Node" unique_id=366840602]
+
+[node name="GameLevel" type="Node" parent="." unique_id=398806209]
+
+[node name="Level" parent="GameLevel" unique_id=995195158 instance=ExtResource("1_2a7ao")]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=806536971]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD" unique_id=1965770942]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="HUD/HBoxContainer" unique_id=758727791]
+layout_mode = 2
+texture = ExtResource("2_x1407")
+
+[node name="TextureRect2" type="TextureRect" parent="HUD/HBoxContainer" unique_id=185034257]
+layout_mode = 2
+texture = ExtResource("3_4g333")
+
+[node name="TextureRect3" type="TextureRect" parent="HUD/HBoxContainer" unique_id=1427280708]
+layout_mode = 2
+texture = ExtResource("4_pjkp7")
