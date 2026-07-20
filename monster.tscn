@@ -8,9 +8,14 @@
 [ext_resource type="Texture2D" uid="uid://8kmveciwju2b" path="res://Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Die.png" id="4_481d3"]
 [ext_resource type="Script" uid="uid://1to1jja7kffg" path="res://monster/monster_state_machine.gd" id="6_8ngjm"]
 [ext_resource type="Script" uid="uid://d3iaojvf884t5" path="res://monster/states/motion/on_ground/run.gd" id="7_3r7jw"]
+[ext_resource type="Texture2D" uid="uid://cq8slwjy4o4vw" path="res://Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Stun.png" id="7_ocebi"]
 [ext_resource type="Script" uid="uid://ccmoy428paht3" path="res://monster/states/motion/on_ground/idle.gd" id="8_rux75"]
 [ext_resource type="Script" uid="uid://cugrrtvekfyb7" path="res://monster/states/motion/on_ground/hit.gd" id="9_rux75"]
 [ext_resource type="Script" uid="uid://bypkkmhi7n1v2" path="res://monster/states/motion/on_ground/die.gd" id="11_iyrhi"]
+[ext_resource type="Script" uid="uid://clnlph0165woc" path="res://monster/states/motion/on_ground/attack.gd" id="12_s53e4"]
+[ext_resource type="Texture2D" uid="uid://ddkidij5ibrfl" path="res://assets/Background Static.png" id="13_s53e4"]
+[ext_resource type="Script" uid="uid://c2n2j3fjdu4u3" path="res://monster/states/motion/on_ground/chase.gd" id="13_tpp6e"]
+[ext_resource type="Script" uid="uid://u20cggyue503" path="res://monster/states/motion/on_ground/stun.gd" id="15_u4bh7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ga5te"]
 radius = 14.0
@@ -103,6 +108,42 @@ tracks/6/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Direction/AttackHitBox/CollisionShape2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Direction/AttackHitBox:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Direction/AttackHitBox:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_vr0w3"]
 resource_name = "idle"
@@ -189,6 +230,42 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0.0, 0.5515240436302086, 1.213003830136059, -0.39269908169872414, -1.9355701404617116, -0.7592182246175333, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Direction/AttackHitBox/CollisionShape2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Direction/AttackHitBox:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(16.98, 3.585), Vector2(33, 15), Vector2(-7.515, -0.455), Vector2(-25, 15)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Direction/AttackHitBox:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.29496064358704127, 1.064650843716541, -0.2181661564992912, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_iyrhi"]
@@ -545,6 +622,130 @@ tracks/6/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_u4bh7"]
+resource_name = "RESET"
+length = 1.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_ocebi")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [18]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:shape:height")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [34.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:shape:radius")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [14.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 16)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CollisionShape2D:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Direction/AttackHitBox/CollisionShape2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Direction/AttackHitBox:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Direction/AttackHitBox:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s3gyj"]
 _data = {
 &"RESET": SubResource("Animation_mrqeg"),
@@ -552,21 +753,32 @@ _data = {
 &"die": SubResource("Animation_iyrhi"),
 &"hit": SubResource("Animation_6tndq"),
 &"idle": SubResource("Animation_s3gyj"),
-&"run": SubResource("Animation_ga5te")
+&"run": SubResource("Animation_ga5te"),
+&"stun": SubResource("Animation_u4bh7")
 }
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o46hk"]
+radius = 7.5
+height = 29.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o46hk"]
+load_path = "res://.godot/imported/Foreground.png-c7e85c9c91d363e5a7c55fdb320dc6b9.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s53e4"]
+load_path = "res://.godot/imported/Background Bar.png-155db12685cbb967f373640603dac5b5.ctex"
 
 [node name="Monster" type="CharacterBody2D" unique_id=939319072]
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 512
 script = ExtResource("1_6tndq")
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=444814243]
 texture = ExtResource("1_vr0w3")
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=383420235]
+visible = false
 position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_ga5te")
 
@@ -593,6 +805,15 @@ script = ExtResource("9_rux75")
 [node name="Die" type="Node" parent="StateMachine" unique_id=1575403748]
 script = ExtResource("11_iyrhi")
 
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1306101380]
+script = ExtResource("12_s53e4")
+
+[node name="Chase" type="Node" parent="StateMachine" unique_id=1947194736]
+script = ExtResource("13_tpp6e")
+
+[node name="Stun" type="Node" parent="StateMachine" unique_id=1646610001]
+script = ExtResource("15_u4bh7")
+
 [node name="FloorDetectRayLeft" type="RayCast2D" parent="." unique_id=498070294]
 position = Vector2(-15, 20)
 target_position = Vector2(0, 20)
@@ -607,25 +828,30 @@ target_position = Vector2(0, 20)
 position = Vector2(0, 16)
 target_position = Vector2(-100, 0)
 
-[node name="HpBar" type="ColorRect" parent="." unique_id=1824209860]
+[node name="AttackHitBox" type="Area2D" parent="Direction" unique_id=570129925]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/AttackHitBox" unique_id=2071896022]
+position = Vector2(0, 8.5)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_o46hk")
+disabled = true
+
+[node name="HpBar" type="TextureProgressBar" parent="." unique_id=511671301]
 visible = false
 offset_left = -25.0
-offset_top = -7.5
+offset_top = -10.0
 offset_right = 25.0
-offset_bottom = -2.5
-color = Color(0, 0, 0, 1)
-metadata/_edit_group_ = true
+offset_bottom = -5.0
+step = 10.0
+value = 100.0
+rounded = true
+nine_patch_stretch = true
+texture_under = ExtResource("13_s53e4")
+texture_over = SubResource("CompressedTexture2D_o46hk")
+texture_progress = SubResource("CompressedTexture2D_s53e4")
 
-[node name="Hp" type="ColorRect" parent="HpBar" unique_id=190240485]
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 5.0
-color = Color(0.78431374, 0, 0, 1)
-metadata/_edit_group_ = true
-
-[node name="ShowTimer" type="Timer" parent="HpBar" unique_id=1552423651]
+[node name="ShowTimer" type="Timer" parent="HpBar" unique_id=1583725172]
 wait_time = 3.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="StateMachine/Idle/IdleTimer" to="StateMachine/Idle" method="_on_idle_timer_timeout"]
-[connection signal="timeout" from="HpBar/ShowTimer" to="." method="_on_show_timer_timeout"]

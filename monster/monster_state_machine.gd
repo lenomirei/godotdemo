@@ -6,6 +6,9 @@ var MONSTER_STATE: Dictionary = preload("res://monster/monster_state.gd").MONSTE
 @onready var run: Node = $Run
 @onready var hit: Node = $Hit
 @onready var die: Node = $Die
+@onready var attack: Node = $Attack
+@onready var chase: Node = $Chase
+@onready var stun: Node = $Stun
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,6 +17,9 @@ func _ready() -> void:
 		MONSTER_STATE.RUN: run,
 		MONSTER_STATE.HIT: hit,
 		MONSTER_STATE.DIE: die,
+		MONSTER_STATE.ATTACK: attack,
+		MONSTER_STATE.CHASE: chase,
+		MONSTER_STATE.STUN: stun,
 	}
 
 func _change_state(next_state_name: StringName) -> void:
@@ -29,6 +35,8 @@ func _physics_process(delta: float) -> void:
 func handle_command(command: MonsterState.MonsterStateMachineCommand) -> void:
 	match command:
 		MonsterState.MonsterStateMachineCommand.HIT:
-			current_state.finished.emit(MONSTER_STATE.HIT);
+			current_state.finished.emit(MONSTER_STATE.HIT)
 		MonsterState.MonsterStateMachineCommand.DIE:
-			current_state.finished.emit(MONSTER_STATE.DIE);
+			current_state.finished.emit(MONSTER_STATE.DIE)
+		MonsterState.MonsterStateMachineCommand.ATTACK:
+			current_state.finished.emit(MONSTER_STATE.ATTACK)

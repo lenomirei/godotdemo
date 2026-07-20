@@ -461,6 +461,7 @@ tile_set = SubResource("TileSet_y32ns")
 
 [node name="CharacterBody2D" parent="." unique_id=928505067 instance=ExtResource("2_oi3di")]
 position = Vector2(415, 250)
+physics_attack_damage = 30
 
 [node name="Monster" parent="." unique_id=939319072 instance=ExtResource("3_oi3di")]
 position = Vector2(680, 237)
