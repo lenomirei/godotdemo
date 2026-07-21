@@ -28,3 +28,10 @@ func hit(damage: int) -> void:
 
 func _on_show_timer_timeout() -> void:
 	hp_bar.visible = false
+
+
+func _on_attack_hit_box_body_entered(body: Node2D) -> void:
+	if body is Player:
+		print("player hit")
+		body as Player
+		body.on_hit(1)

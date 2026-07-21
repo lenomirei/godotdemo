@@ -13,6 +13,8 @@ var PLAYER_STATE: Dictionary = preload("res://player/player_state.gd").PLAYER_ST
 @onready var crouch_in: Node = $CrouchIn
 @onready var crouch_idle: Node = $CrouchIdle
 @onready var crouch_walk: Node = $CrouchWalk
+@onready var hit: Node = $Hit
+@onready var die: Node = $Die
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,6 +30,8 @@ func _ready() -> void:
 		PLAYER_STATE.CROUCHIN: crouch_in,
 		PLAYER_STATE.CROUCHIDLE: crouch_idle,
 		PLAYER_STATE.CROUCHWALK: crouch_walk,
+		PLAYER_STATE.HIT: hit,
+		PLAYER_STATE.DIE: die,
 	}
 
 func _change_state(next_state_name: StringName) -> void:
@@ -42,4 +46,10 @@ func _change_state(next_state_name: StringName) -> void:
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	owner.move_and_slide() # This could also be delegated to each state.
-	
+
+func handle_command(command: PlayerState.PlayerStateMachineCommand) -> void:
+	match command:
+		PlayerState.PlayerStateMachineCommand.HIT:
+			current_state.finished.emit(PLAYER_STATE.HIT)
+		PlayerState.PlayerStateMachineCommand.DIE:	
+			current_state.finished.emit(PLAYER_STATE.DIE)

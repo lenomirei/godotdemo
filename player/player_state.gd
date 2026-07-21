@@ -1,5 +1,10 @@
 extends "res://state_machine/state.gd"
+
+class_name PlayerState
+
 enum WeaponState { HOLSTERED, DRAWN }
+
+enum PlayerStateMachineCommand { HIT, DIE }
 
 const PLAYER_STATE: Dictionary[StringName, StringName] = {
 	&"IDLE": &"idle",
@@ -13,6 +18,8 @@ const PLAYER_STATE: Dictionary[StringName, StringName] = {
 	&"CROUCHIN": &"crouch_in",
 	&"CROUCHIDLE": &"crouch_idle",
 	&"CROUCHWALK": &"crouch_walk",
+	&"HIT": &"hit",
+	&"DIE": &"die",
 }
 
 func get_on_floor() -> bool:
