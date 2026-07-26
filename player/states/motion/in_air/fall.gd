@@ -4,7 +4,7 @@ var last_yvelocity
 func enter() -> void:
 	var weapon_state = get_weapon_state()
 	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
-	owner.get_node(^"AnimationPlayer").play("fall" + suffix)
+	animation_player.play("fall" + suffix)
 
 
 func update(_delta: float) -> void:

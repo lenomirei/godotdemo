@@ -3,8 +3,11 @@ extends "res://player/states/motion/motion.gd"
 var speed := 0.0
 var velocity := Vector2()
 
+func can_jump() -> bool:
+	return true
+
 func handle_input(_input_event: InputEvent) -> void:
-	if _input_event.is_action_pressed("jump"):
+	if _input_event.is_action_pressed("jump") and can_jump():
 		finished.emit(PLAYER_STATE.JUMP)
 		
 	if _input_event.is_action_pressed("attack"):

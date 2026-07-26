@@ -1,10 +1,10 @@
 extends "on_ground.gd"
 
 func enter() -> void:
-	owner.velocity.x = 0
+	player_motor.stop_horization()
 	var weapon_state = get_weapon_state()
 	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
-	owner.get_node(^"AnimationPlayer").play("idle" + suffix)
+	animation_player.play("idle" + suffix)
 
 func update(_delta: float) -> void:
 	var input_direction: Vector2 = get_input_direction()

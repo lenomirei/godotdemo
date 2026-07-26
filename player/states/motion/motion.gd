@@ -3,6 +3,9 @@ extends "res://player/player_state.gd"
 const SPEED = 300.0
 const CROUCH_SPEED = 150.0
 
+@onready var player_motor: PlayerMotor = owner.get_node(^"PlayerMotor")
+@onready var animation_player: AnimationPlayer = owner.get_node(^"AnimationPlayer")
+
 func handle_input(_input_event: InputEvent) -> void:
 	if _input_event.is_action_pressed("climbup") || _input_event.is_action_pressed("climbdown"):
 		try_climb()
@@ -78,7 +81,7 @@ func try_climb() -> void:
 		finished.emit(PLAYER_STATE.LADDERING)
 
 func refresh_animation() -> void:
-	var animation_player: AnimationPlayer = owner.get_node(^"AnimationPlayer")
+	var animation_player: AnimationPlayer = animation_player
 	var weapon_state = get_weapon_state()
 	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
 	var animation_name = PLAYER_STATE[name.to_upper()] + suffix;

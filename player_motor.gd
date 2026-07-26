@@ -1,11 +1,11 @@
-extends Node2D
+extends Node
 
-class_name PlayMotor
+class_name PlayerMotor
 
 @export var MOVE_SPEED: int = 300
 @export var CROUCHING_SPEED: int = 150
 
-@onready var player := get_parent() as Player
+@onready var player: Player = get_parent() as Player
 
 func get_input_direction() -> Vector2:
 	return Vector2(
@@ -33,7 +33,9 @@ func move_horization(delta: float) -> void:
 		update_look_direction(get_facing_left())
 		# Respond to horizontal movement both in the air and on the ground.
 		owner.velocity.x = direction.x * MOVE_SPEED
-		
+	else:
+		brake_horization(delta)
+
 func brake_horization(delta: float) -> void:
 	player.velocity.x = move_toward(owner.velocity.x, 0, owner.velocity.x)
 	
@@ -46,4 +48,4 @@ func jump(speed: float) -> void:
 func apply_gravity(delta: float, scale: int = -1.0) -> void:
 	if player.is_on_floor():
 		return
-	player.velocity += owner.get_gravity() * delta
+	player.velocity += player.get_gravity() * delta

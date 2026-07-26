@@ -3,7 +3,7 @@ extends "res://player/states/motion/on_ground/on_ground.gd"
 func enter() -> void:
 	var weapon_state = get_weapon_state()
 	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
-	owner.get_node(^"AnimationPlayer").play("landing" + suffix)
+	animation_player.play("landing" + suffix)
 	
 func handle_input(_input_event: InputEvent) -> void:
 	if _input_event.is_action_pressed("rolling"):

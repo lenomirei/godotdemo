@@ -40,7 +40,8 @@
 [ext_resource type="Script" uid="uid://cysxnap8yrgfc" path="res://player/states/motion/on_ground/crouch/crouch_idle.gd" id="34_tkwlq"]
 [ext_resource type="Script" uid="uid://b1b7wpp1auh38" path="res://player/states/motion/on_ground/crouch/crouch_walk.gd" id="35_hl5qd"]
 [ext_resource type="Script" uid="uid://cocy5p0yxi3sn" path="res://player/states/motion/hit.gd" id="40_331ug"]
-[ext_resource type="Script" uid="uid://7hf4hk5ooxkv" path="res://player/states/motion/on_ground/die.gd" id="41_ny14h"]
+[ext_resource type="Script" uid="uid://k6wv3cu1yclr" path="res://player/states/motion/die.gd" id="41_ny14h"]
+[ext_resource type="Script" uid="uid://cvv5sii44afpx" path="res://player_motor.gd" id="42_ibah8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_186t8"]
 radius = 14.0
@@ -1821,6 +1822,9 @@ one_shot = true
 [node name="BufferTimer" type="Timer" parent="." unique_id=1192582721]
 wait_time = 0.3
 
+[node name="PlayerMotor" type="Node" parent="." unique_id=352569500]
+script = ExtResource("42_ibah8")
+
 [node name="StateMachine" type="Node" parent="." unique_id=842564576]
 script = ExtResource("16_u1c27")
 start_state = NodePath("Idle")
@@ -1882,8 +1886,6 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/AttackHitBox" unique_id=857763645]
 shape = SubResource("CapsuleShape2D_khis8")
 disabled = true
-
-[node name="PlayMotor" type="Node" parent="." unique_id=352569500]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="AttackComboTimer" to="." method="_on_attack_combo_timer_timeout"]

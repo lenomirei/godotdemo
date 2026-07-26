@@ -4,6 +4,7 @@ var attack_combo = 1
 var handle_pre_attack: bool = false
 
 func enter() -> void:
+	player_motor.stop_horization()
 	if get_weapon_state() != WeaponState.DRAWN:
 		change_weapon_state()
 	handle_pre_attack = false
@@ -12,7 +13,7 @@ func enter() -> void:
 		$AttackComboTimer.stop()
 	if attack_combo > 4:
 			attack_combo = 1
-	owner.get_node(^"AnimationPlayer").play("attack" + String.num_int64(attack_combo))
+	animation_player.play("attack" + String.num_int64(attack_combo))
 	
 func handle_input(_input_event: InputEvent) -> void:
 	if _input_event.is_action_pressed("attack"):
@@ -36,5 +37,7 @@ func _on_attack_combo_timer_timeout() -> void:
 	attack_combo = 1
 	
 func update(_delta: float) -> void:
-	# Temporarily prevent movement while attacking.
-	owner.velocity.x = 0
+	pass
+
+func can_jump() -> bool:
+	return false
