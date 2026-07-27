@@ -1,13 +1,13 @@
 extends "res://player/states/motion/in_air/in_air.gd"
 
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = 400.0
 
 func init(speed: float, velocity: float) -> void:
 	pass
 	
 func enter() -> void:
 	update_look_direction(get_facing_left())
-	owner.velocity.y = JUMP_VELOCITY
+	player_motor.jump(JUMP_VELOCITY)
 	var weapon_state = get_weapon_state()
 	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
 	animation_player.play("jump" + suffix)

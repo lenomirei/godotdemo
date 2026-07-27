@@ -4,6 +4,7 @@ class_name PlayerMotor
 
 @export var MOVE_SPEED: int = 300
 @export var CROUCHING_SPEED: int = 150
+@export var ROLLING_SPEED = 150
 
 @onready var player: Player = get_parent() as Player
 

@@ -14,6 +14,7 @@ func update(_delta: float) -> void:
 		finished.emit(MONSTER_STATE.IDLE)
 	elif not floor_detect_ray_right.is_colliding() and direction == Vector2.RIGHT:
 		finished.emit(MONSTER_STATE.IDLE)
+	super.update(_delta)
 
 func exit() -> void:
 	owner.velocity.x = 0

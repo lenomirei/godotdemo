@@ -22,6 +22,8 @@ func update(_delta: float) -> void:
 		var d: float = player.position.distance_to(owner.position)
 		if d < 100:
 			finished.emit(MONSTER_STATE.ATTACK)
+	else:
+		finished.emit(MONSTER_STATE.IDLE)
 
 func exit() -> void:
 	owner.velocity.x = 0

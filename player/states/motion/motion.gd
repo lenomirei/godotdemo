@@ -31,12 +31,7 @@ func update_look_direction(left: bool) -> void:
 	owner.get_node(^"Weapon").scale.x = -1 if owner.facing_left else 1
 
 func update(_delta: float) -> void:
-	# handle input and speed in x direction
-	var direction :Vector2 = get_input_direction()
-	if direction.x:
-		update_look_direction(get_facing_left())
-		# Respond to horizontal movement both in the air and on the ground.
-		owner.velocity.x = direction.x * SPEED
+	super.update(_delta)
 
 func is_on_ladder() -> bool:
 	var tilemap: TileMapLayer = owner.get_parent().get_node(^"TileMapLayer")
