@@ -3,6 +3,9 @@ extends "res://player/player_state.gd"
 const SPEED = 300.0
 const CROUCH_SPEED = 150.0
 
+@onready var player_motor: PlayerMotor = owner.get_node(^"PlayerMotor")
+@onready var animation_player: AnimationPlayer = owner.get_node(^"AnimationPlayer")
+
 func handle_input(_input_event: InputEvent) -> void:
 	if _input_event.is_action_pressed("climbup") || _input_event.is_action_pressed("climbdown"):
 		try_climb()
@@ -28,12 +31,7 @@ func update_look_direction(left: bool) -> void:
 	owner.get_node(^"Weapon").scale.x = -1 if owner.facing_left else 1
 
 func update(_delta: float) -> void:
-	# handle input and speed in x direction
-	var direction :Vector2 = get_input_direction()
-	if direction.x:
-		update_look_direction(get_facing_left())
-		# Respond to horizontal movement both in the air and on the ground.
-		owner.velocity.x = direction.x * SPEED
+	super.update(_delta)
 
 func is_on_ladder() -> bool:
 	var tilemap: TileMapLayer = owner.get_parent().get_node(^"TileMapLayer")
@@ -78,7 +76,7 @@ func try_climb() -> void:
 		finished.emit(PLAYER_STATE.LADDERING)
 
 func refresh_animation() -> void:
-	var animation_player: AnimationPlayer = owner.get_node(^"AnimationPlayer")
+	var animation_player: AnimationPlayer = animation_player
 	var weapon_state = get_weapon_state()
 	var suffix = "_weapon" if weapon_state == WeaponState.DRAWN else ""
 	var animation_name = PLAYER_STATE[name.to_upper()] + suffix;

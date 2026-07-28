@@ -3,7 +3,7 @@ extends "res://monster/states/motion/on_ground/on_ground.gd"
 const MONSTER_SPEED: int = 100
 
 func enter() -> void:
-	owner.get_node(^"AnimationPlayer").play("run")
+	animation_player.play("run")
 
 func update(_delta: float) -> void:
 	var floor_detect_ray_left: RayCast2D = owner.get_node(^"FloorDetectRayLeft");
@@ -14,6 +14,7 @@ func update(_delta: float) -> void:
 		finished.emit(MONSTER_STATE.IDLE)
 	elif not floor_detect_ray_right.is_colliding() and direction == Vector2.RIGHT:
 		finished.emit(MONSTER_STATE.IDLE)
+	super.update(_delta)
 
 func exit() -> void:
 	owner.velocity.x = 0

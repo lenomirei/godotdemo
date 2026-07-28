@@ -3,7 +3,7 @@ extends "res://monster/states/motion/on_ground/on_ground.gd"
 const MONSTER_SPEED: int = 100
 
 func enter() -> void:
-	owner.get_node(^"AnimationPlayer").play("run")
+	animation_player.play("run")
 
 func update(_delta: float) -> void:
 	#var floor_detect_ray_left: RayCast2D = owner.get_node(^"FloorDetectRayLeft");
@@ -22,6 +22,8 @@ func update(_delta: float) -> void:
 		var d: float = player.position.distance_to(owner.position)
 		if d < 100:
 			finished.emit(MONSTER_STATE.ATTACK)
+	else:
+		finished.emit(MONSTER_STATE.IDLE)
 
 func exit() -> void:
 	owner.velocity.x = 0

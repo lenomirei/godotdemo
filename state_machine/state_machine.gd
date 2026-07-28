@@ -31,6 +31,8 @@ func initialize(initial_state: Node) -> void:
 	_active = true
 	states_stack.push_front(initial_state)
 	current_state = states_stack[0]
+
+func _ready() -> void:
 	current_state.enter()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

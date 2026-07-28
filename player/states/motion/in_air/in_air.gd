@@ -3,7 +3,7 @@ extends "res://player/states/motion/motion.gd"
 
 func update(_delta: float) -> void:
 	# gravity
-	owner.velocity += owner.get_gravity() * _delta
+	player_motor.apply_gravity(_delta)
 	
 	# 横向阻力
 	var direction :Vector2 = get_input_direction()

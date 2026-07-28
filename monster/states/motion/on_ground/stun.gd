@@ -1,7 +1,7 @@
 extends "res://monster/states/motion/on_ground/on_ground.gd"
 
 func enter() -> void:
-	var animation_player: AnimationPlayer = owner.get_node(^"AnimationPlayer")
+	var animation_player: AnimationPlayer = animation_player
 	animation_player.play("stun")
 	
 func update(_delta: float) -> void:
