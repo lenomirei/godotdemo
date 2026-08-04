@@ -6,6 +6,9 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 @export var physics_attack_damage: int
 @export var hp: int
+@export var max_hp: int
+
+signal health_changed(old_hp: int, hp: int)
 
 enum WeaponState { HOLSTERED, DRAWN }
 var weapon_state: WeaponState = WeaponState.HOLSTERED
@@ -204,6 +207,7 @@ var attack_combo = 0
 	#attack_combo = 0
 	
 func on_hit(damage: int) -> void:
+	health_changed.emit(hp, hp - 1)
 	hp -= 1
 	if hp <= 0:
 		get_node(^"StateMachine").handle_command(PlayerState.PlayerStateMachineCommand.DIE)
