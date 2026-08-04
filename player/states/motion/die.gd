@@ -11,6 +11,7 @@ func update(_delta: float) -> void:
 
 func _on_animation_finished(_anim_name: String) -> void:
 	if _anim_name.begins_with("die"):
+		owner.handle_die_callback()
 		owner.queue_free()
 
 func handle_input(_input_event: InputEvent) -> void:
