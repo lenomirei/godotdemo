@@ -88,7 +88,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [7]
+"values": [4]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -1807,7 +1807,7 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1291833505]
 texture = ExtResource("2_ij6vw")
-hframes = 7
+hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=253605850]
 shape = SubResource("CapsuleShape2D_186t8")
