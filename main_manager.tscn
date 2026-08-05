@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bblhk2li6orqs"]
+
+[ext_resource type="Script" uid="uid://chg1ngf8cpqu6" path="res://main_manager.gd" id="1_rqo8u"]
+[ext_resource type="Texture2D" uid="uid://bm5cr0y4fhsja" path="res://assets/Stone_UI_Sprite_Sheet.png" id="2_rqo8u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqo8u"]
+atlas = ExtResource("2_rqo8u")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_la2su"]
+atlas = ExtResource("2_rqo8u")
+region = Rect2(64, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1407"]
+atlas = ExtResource("2_rqo8u")
+region = Rect2(32, 192, 32, 32)
+
+[node name="MainManager" type="Node" unique_id=366840602]
+script = ExtResource("1_rqo8u")
+
+[node name="GameLevel" type="Node" parent="." unique_id=398806209]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=806536971]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD" unique_id=1877860100]
+theme_override_constants/separation = 0
+
+[node name="Pause" type="CanvasLayer" parent="." unique_id=1958108582]
+process_mode = 2
+visible = false
+
+[node name="TextureButton" type="TextureButton" parent="Pause" unique_id=1924816300]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -16.0
+offset_right = 38.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_rqo8u")
+texture_pressed = SubResource("AtlasTexture_la2su")
+texture_hover = SubResource("AtlasTexture_x1407")
+stretch_mode = 0
+
+[connection signal="button_down" from="Pause/TextureButton" to="." method="_on_texture_button_button_down"]
+[connection signal="pressed" from="Pause/TextureButton" to="." method="_on_texture_button_pressed"]
