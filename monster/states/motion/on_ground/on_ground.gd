@@ -1,10 +1,11 @@
 extends "res://monster/states/motion/motion.gd"
 
 func update(_delta: float) -> void:
-	var player_detect_ray: RayCast2D = owner.get_node(^"Direction/PlayerDetectRay")
+	var player_detect_area: Area2D = owner.get_node(^"PlayerDetectArea")
 	
-	if player_detect_ray.is_colliding() and player_detect_ray.collide_with_bodies and player_detect_ray.get_collider() is Player:
-		var player: Player = player_detect_ray.get_collider() as Player
-		finished.emit(MONSTER_STATE.CHASE)
+	var bodies: Array = player_detect_area.get_overlapping_bodies()
+	if not bodies.is_empty():
+		if bodies[0] is Player:
+			finished.emit(MONSTER_STATE.CHASE)
 			
 	super.update(_delta)

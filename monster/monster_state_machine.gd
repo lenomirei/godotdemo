@@ -40,3 +40,6 @@ func handle_command(command: MonsterState.MonsterStateMachineCommand) -> void:
 			current_state.finished.emit(MONSTER_STATE.DIE)
 		MonsterState.MonsterStateMachineCommand.ATTACK:
 			current_state.finished.emit(MONSTER_STATE.ATTACK)
+		MonsterState.MonsterStateMachineCommand.CHASE:
+			# direction
+			current_state.finished.emit(MONSTER_STATE.CHASE)

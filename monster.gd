@@ -9,6 +9,7 @@ const JUMP_VELOCITY = -400.0
 @onready var show_timer: Timer = $"HpBar/ShowTimer"
 
 var facing_left = true
+var player: Player
 
 func hit(damage: int) -> void:
 	print("get hit")
@@ -20,7 +21,7 @@ func hit(damage: int) -> void:
 	
 	if hp_bar.value <= 0:
 		$"CollisionShape2D".set_deferred("disabled", true)
-		$"Direction/PlayerDetectRay".set_deferred("enabled", false)
+		$"Direction/PlayerDetectArea".set_deferred("enabled", false)
 		get_node(^"StateMachine").handle_command(MonsterState.MonsterStateMachineCommand.DIE)
 	else:
 		get_node(^"StateMachine").handle_command(MonsterState.MonsterStateMachineCommand.HIT)
@@ -32,6 +33,11 @@ func _on_show_timer_timeout() -> void:
 
 func _on_attack_hit_box_body_entered(body: Node2D) -> void:
 	if body is Player:
-		print("player hit")
 		body as Player
 		body.on_hit(1)
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Player:
+		player = body as Player
+		get_node(^"StateMachine").handle_command(MonsterState.MonsterStateMachineCommand.CHASE)

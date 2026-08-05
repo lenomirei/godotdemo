@@ -12,4 +12,4 @@ const MONSTER_STATE: Dictionary[StringName, StringName] = {
 	&"STUN": &"stun",
 }
 
-enum MonsterStateMachineCommand { HIT, DIE, ATTACK }
+enum MonsterStateMachineCommand { HIT, DIE, ATTACK, CHASE }
