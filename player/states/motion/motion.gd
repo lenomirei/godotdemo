@@ -34,7 +34,7 @@ func update(_delta: float) -> void:
 	super.update(_delta)
 
 func is_on_ladder() -> bool:
-	var tilemap: TileMapLayer = owner.get_parent().get_node(^"TileMapLayer")
+	var tilemap: TileMapLayer = owner.get_parent().get_node(^"Level/TileMapLayer")
 	var shape_node = owner.get_node(^"CollisionShape2D")
 	var shape = shape_node.shape
 	var center = shape_node.global_position
@@ -57,7 +57,7 @@ func is_on_ladder() -> bool:
 	return false
 	
 func ladder_is_by_feet() -> bool:
-	var tilemap: TileMapLayer = owner.get_parent().get_node(^"TileMapLayer")
+	var tilemap: TileMapLayer = owner.get_parent().get_node(^"Level/TileMapLayer")
 	var raycast: RayCast2D = owner.get_node(^"LadderDetectRay")
 	var point: Vector2 = raycast.get_collision_point()
 	var local: Vector2 = tilemap.to_local(point)

@@ -767,6 +767,9 @@ load_path = "res://.godot/imported/Foreground.png-c7e85c9c91d363e5a7c55fdb320dc6
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s53e4"]
 load_path = "res://.godot/imported/Background Bar.png-155db12685cbb967f373640603dac5b5.ctex"
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4bh7"]
+size = Vector2(200, 20)
+
 [node name="Monster" type="CharacterBody2D" unique_id=939319072]
 scale = Vector2(2, 2)
 collision_layer = 2
@@ -824,10 +827,6 @@ target_position = Vector2(0, 20)
 
 [node name="Direction" type="Node2D" parent="." unique_id=163252325]
 
-[node name="PlayerDetectRay" type="RayCast2D" parent="Direction" unique_id=1146462238]
-position = Vector2(0, 16)
-target_position = Vector2(-100, 0)
-
 [node name="AttackHitBox" type="Area2D" parent="Direction" unique_id=570129925]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Direction/AttackHitBox" unique_id=2071896022]
@@ -853,6 +852,14 @@ texture_progress = SubResource("CompressedTexture2D_s53e4")
 [node name="ShowTimer" type="Timer" parent="HpBar" unique_id=1583725172]
 wait_time = 3.0
 
+[node name="PlayerDetectArea" type="Area2D" parent="." unique_id=146434571]
+collision_layer = 2147483648
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectArea" unique_id=864786738]
+position = Vector2(0, 17.5)
+shape = SubResource("RectangleShape2D_u4bh7")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine" method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="StateMachine/Idle/IdleTimer" to="StateMachine/Idle" method="_on_idle_timer_timeout"]
 [connection signal="body_entered" from="Direction/AttackHitBox" to="." method="_on_attack_hit_box_body_entered"]
+[connection signal="body_entered" from="PlayerDetectArea" to="." method="_on_area_2d_body_entered"]

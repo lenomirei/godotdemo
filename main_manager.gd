@@ -2,7 +2,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var level_scene: PackedScene = preload("res://Level.tscn")
+	var level_scene: PackedScene = preload("res://level.tscn")
 	var level := level_scene.instantiate()
 	level.init()
 	$"GameLevel".add_child(level)

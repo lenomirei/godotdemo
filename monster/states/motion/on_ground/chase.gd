@@ -6,24 +6,19 @@ func enter() -> void:
 	animation_player.play("run")
 
 func update(_delta: float) -> void:
-	#var floor_detect_ray_left: RayCast2D = owner.get_node(^"FloorDetectRayLeft");
-	#var floor_detect_ray_right: RayCast2D = owner.get_node(^"FloorDetectRayRight");
-	var direction: Vector2 = get_look_direction()
-	owner.velocity.x = direction.x * MONSTER_SPEED
-	#if not floor_detect_ray_left.is_colliding() and direction == Vector2.LEFT:
-		#finished.emit(MONSTER_STATE.IDLE)
-	#elif not floor_detect_ray_right.is_colliding() and direction == Vector2.RIGHT:
-		#finished.emit(MONSTER_STATE.IDLE)
-	
-	var player_detect_ray: RayCast2D = owner.get_node(^"Direction/PlayerDetectRay")
-	
-	if player_detect_ray.is_colliding() and player_detect_ray.collide_with_bodies and player_detect_ray.get_collider() is Player:
-		var player:Player = player_detect_ray.get_collider()
-		var d: float = player.position.distance_to(owner.position)
-		if d < 100:
+	var monster: Monster = owner as Monster
+	var player: Player = monster.player
+	if player:
+		var direction := monster.global_position.direction_to(player.global_position).normalized()
+		if direction.x < 0:
+			update_look_direction(true)
+		else:
+			update_look_direction(false)
+		var distance: float = player.position.distance_to(monster.position)
+		if distance < 100:
 			finished.emit(MONSTER_STATE.ATTACK)
-	else:
-		finished.emit(MONSTER_STATE.IDLE)
+		else:
+			owner.velocity.x = get_look_direction().x * MONSTER_SPEED
 
 func exit() -> void:
 	owner.velocity.x = 0
