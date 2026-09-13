@@ -21,7 +21,7 @@ func hit(damage: int) -> void:
 	
 	if hp_bar.value <= 0:
 		$"CollisionShape2D".set_deferred("disabled", true)
-		$"Direction/PlayerDetectArea".set_deferred("enabled", false)
+		$"PlayerDetectArea".set_deferred("enabled", false)
 		get_node(^"StateMachine").handle_command(MonsterState.MonsterStateMachineCommand.DIE)
 	else:
 		get_node(^"StateMachine").handle_command(MonsterState.MonsterStateMachineCommand.HIT)
