@@ -1,3 +1,5 @@
 # Godot 4+ specific ignores
+# Patterns are deliberately unanchored (no leading "/") so they apply inside
+# every project subfolder as well, e.g. platformer/.godot/ and platformer/android/.
 .godot/
-/android/
+android/
