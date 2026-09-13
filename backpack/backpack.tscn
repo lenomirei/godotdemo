@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://dqtui721wnuyv"]
+
+[ext_resource type="PackedScene" uid="uid://dvjv36a65s1xm" path="res://slot.tscn" id="1_l1ewb"]
+[ext_resource type="Script" uid="uid://c0i1ybw0fundb" path="res://item.gd" id="2_28tt4"]
+[ext_resource type="Texture2D" uid="uid://de4jrxta1pou3" path="res://icon.svg" id="3_uwy55"]
+
+[sub_resource type="Resource" id="Resource_lugdk"]
+script = ExtResource("2_28tt4")
+texture = ExtResource("3_uwy55")
+metadata/_custom_type_script = "uid://c0i1ybw0fundb"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_28tt4"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[sub_resource type="Resource" id="Resource_uwy55"]
+script = ExtResource("2_28tt4")
+item_id = 2
+texture = SubResource("CompressedTexture2D_28tt4")
+metadata/_custom_type_script = "uid://c0i1ybw0fundb"
+
+[node name="Control" type="Control" unique_id=1106923958]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=875564872]
+layout_mode = 1
+offset_right = 256.0
+offset_bottom = 81.0
+columns = 4
+
+[node name="Slot" parent="GridContainer" unique_id=1958370700 instance=ExtResource("1_l1ewb")]
+layout_mode = 2
+
+[node name="Slot2" parent="GridContainer" unique_id=1954109997 instance=ExtResource("1_l1ewb")]
+layout_mode = 2
+
+[node name="Slot3" parent="GridContainer" unique_id=1144909050 instance=ExtResource("1_l1ewb")]
+layout_mode = 2
+
+[node name="Slot4" parent="GridContainer" unique_id=164255547 instance=ExtResource("1_l1ewb")]
+layout_mode = 2
+
+[node name="Slot5" parent="GridContainer" unique_id=171730389 instance=ExtResource("1_l1ewb")]
+layout_mode = 2
+
+[node name="Slot6" parent="GridContainer" unique_id=55001660 instance=ExtResource("1_l1ewb")]
+layout_mode = 2
+
+[node name="Slot7" parent="GridContainer" unique_id=193320987 instance=ExtResource("1_l1ewb")]
+layout_mode = 2
+
+[node name="Slot8" parent="GridContainer" unique_id=341191400 instance=ExtResource("1_l1ewb")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=234398117]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MySlot" parent="." unique_id=214103878 instance=ExtResource("1_l1ewb")]
+layout_mode = 0
+offset_left = 500.0
+offset_right = 564.0
+item = SubResource("Resource_lugdk")
+count_of_item = 3
+
+[node name="MySlot2" parent="." unique_id=874398464 instance=ExtResource("1_l1ewb")]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 68.0
+offset_right = 564.0
+offset_bottom = 132.0
+item = SubResource("Resource_lugdk")
+count_of_item = 3
+
+[node name="MySlot3" parent="." unique_id=110800236 instance=ExtResource("1_l1ewb")]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 67.0
+offset_right = 640.0
+offset_bottom = 131.0
+item = SubResource("Resource_uwy55")
+count_of_item = 3
+
+[editable path="MySlot"]
+[editable path="MySlot2"]
+[editable path="MySlot3"]
