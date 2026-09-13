@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dvjv36a65s1xm"]
+
+[ext_resource type="Script" uid="uid://cp13qjy3h0i0f" path="res://slot.gd" id="1_c24ra"]
+
+[node name="Slot" type="Button" unique_id=1958370700]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_c24ra")
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=850167277]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.16685283, 0.16685283, 0.16685283, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=755779601]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=1736200363]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 41.0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
